@@ -1,0 +1,55 @@
+.header
+  .header__left
+    .header__left__user
+      test-user
+    = link_to "#", class: "header__left--icon" do
+      = fa_icon 'edit', class: "header__left--icon__edit"
+    = link_to "#", class: "header__left--icon" do
+      = fa_icon 'cog', class: "header__left--icon__cog"
+  .header__right
+    .header__right__group
+      test-group
+    .header__right__member
+      Member : test,test2,test3,test4
+    .header__right__edit
+      Edit
+
+.body
+  .body__left
+    .body__left__group
+      sample-group1
+    .body__left__message
+      hello!
+    .body__left__group
+      sample-group2
+    .body__left__message
+      good!
+  .body__right
+    .body__right__content
+      .body__right__content__user
+        test-user1
+      .body__right__content__date
+        2019/08/13(Fri) 12:12:12
+    .body__right__message
+      こんにちは！
+    .body__right__content
+      .body__right__content__user
+        test-user2
+      .body__right__content__date
+        2019/12/12(Fri) 10:10:10
+    .body__right__message
+      おはよう！！
+    .body__right__content
+      .body__right__content__user
+        test-user2
+      .body__right__content__date
+        2019/12/12(Fri) 10:10:10
+    .body__right__message
+      おはよう！！
+    .body__right__footer
+      .body__right__footer__form
+        %input(type="text" name="form" placeholder="type a message" class="body__right__footer__form__input")
+        %label
+          %input(type="file" name="file" class="file__select")
+            = fa_icon 'image', class: "body__right__footer__form--icon"
+      %input(type="submit" value="Send" class="body__right__footer__send")
