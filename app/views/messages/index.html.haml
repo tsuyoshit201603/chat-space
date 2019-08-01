@@ -1,10 +1,10 @@
 .header
   .header__left
     .header__left__user
-      test-user
+      = current_user.name
     = link_to "#", class: "header__left--icon" do
       = fa_icon 'edit', class: "header__left--icon__edit"
-    = link_to "#", class: "header__left--icon" do
+    = link_to edit_user_path(current_user), class: "header__left--icon" do
       = fa_icon 'cog', class: "header__left--icon__cog"
   .header__right
     .header__right__group
