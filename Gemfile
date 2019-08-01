@@ -60,3 +60,6 @@ gem "font-awesome-rails"
 
 #devise
 gem 'devise'
+
+#rails-i18n
+gem 'rails-i18n', '~>5.1'
