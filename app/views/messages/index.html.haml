@@ -2,7 +2,7 @@
   .header__left
     .header__left__user
       = current_user.name
-    = link_to "#", class: "header__left--icon" do
+    = link_to new_group_path, class: "header__left--icon" do
       = fa_icon 'edit', class: "header__left--icon__edit"
     = link_to edit_user_path(current_user), class: "header__left--icon" do
       = fa_icon 'cog', class: "header__left--icon__cog"
@@ -16,14 +16,12 @@
 
 .body
   .body__left
-    .body__left__group
-      sample-group1
-    .body__left__message
-      hello!
-    .body__left__group
-      sample-group2
-    .body__left__message
-      good!
+    - current_user.groups.each do |group|
+      =link_to group_messages_path(group) do
+        .body__left__group
+          = group.name
+        .body__left__message
+          メッセージはまだありません。
   .body__right
     .body__right__content
       .body__right__content__user
