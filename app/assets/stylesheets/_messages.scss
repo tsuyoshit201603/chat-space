@@ -120,26 +120,26 @@ html, body {
       justify-content: center;
       align-items: center;
       &__form {
-        height: 50px;
-        background-color: white;
-        font-size: 16px;
-        color: $dark-gray;
-        line-height: 50px;
-        margin-left: 40px;
+        // height: 50px;
+        // background-color: white;
+        // font-size: 16px;
+        // color: $dark-gray;
+        // margin-left: 40px;
         flex-basis: calc(100vw - 300px - 40px - 40px);
-        position: relative;
+        // position: relative;
         &__input {
-          height: 100%;
+          height: 50px;
           width: 100%;
           padding-left: 10px;
           border-style: none;
         }
         &--icon {
           position: absolute;
-            bottom: 15px;
-            right: 0px;
+            bottom: 0;
+            right: 0;
             cursor: pointer;
             color: black;
+            line-height: 50px;
         }
       }
       &__send {
@@ -159,4 +159,13 @@ html, body {
 
 .file__select {
   display: none;
+}
+
+.new_message {
+  display: flex;
+}
+
+.form__mask {
+  flex-basis: calc(100vw - 300px - 40px - 40px);
+  position: relative;
 }
