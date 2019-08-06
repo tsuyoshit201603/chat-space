@@ -21,33 +21,16 @@
         .body__left__group
           = group.name
         .body__left__message
-          メッセージはまだありません。
+          = group.show_last_message
   .body__right
-    .body__right__content
-      .body__right__content__user
-        test-user1
-      .body__right__content__date
-        2019/08/13(Fri) 12:12:12
-    .body__right__message
-      こんにちは！
-    .body__right__content
-      .body__right__content__user
-        test-user2
-      .body__right__content__date
-        2019/12/12(Fri) 10:10:10
-    .body__right__message
-      おはよう！！
-    .body__right__content
-      .body__right__content__user
-        test-user2
-      .body__right__content__date
-        2019/12/12(Fri) 10:10:10
-    .body__right__message
-      おはよう！！
+    = render partial: 'message', collection: @messages
     .body__right__footer
       .body__right__footer__form
-        %input(type="text" name="form" placeholder="type a message" class="body__right__footer__form__input")
-        %label
-          %input(type="file" name="file" class="file__select")
-            = fa_icon 'image', class: "body__right__footer__form--icon"
-      %input(type="submit" value="Send" class="body__right__footer__send")
+        = form_for [@group, @message] do |f|
+          .form__mask
+            = f.text_field :content, class: 'body__right__footer__form__input', placeholder: 'type a message'
+            .form__masks
+              = f.label :image do
+                = fa_icon 'image', class: "body__right__footer__form--icon"
+                = f.file_field :image, class: 'file__select'
+          = f.submit 'Send', class: 'body__right__footer__send'
