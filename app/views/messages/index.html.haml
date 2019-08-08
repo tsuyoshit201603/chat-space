@@ -23,7 +23,8 @@
         .body__left__message
           = group.show_last_message
   .body__right
-    = render partial: 'message', collection: @messages
+    .body__right__contents
+      = render partial: 'message', collection: @messages
     .body__right__footer
       .body__right__footer__form
         = form_for [@group, @message] do |f|
