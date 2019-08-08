@@ -86,7 +86,6 @@ html, body {
     }
   }
   &__right {
-    background-color: #fafafa;
     width: calc(100vw - 300px);
     position: relative;
     top: $header-height;
@@ -120,13 +119,7 @@ html, body {
       justify-content: center;
       align-items: center;
       &__form {
-        // height: 50px;
-        // background-color: white;
-        // font-size: 16px;
-        // color: $dark-gray;
-        // margin-left: 40px;
         flex-basis: calc(100vw - 300px - 40px - 40px);
-        // position: relative;
         &__input {
           height: 50px;
           width: 100%;
@@ -168,4 +161,10 @@ html, body {
 .form__mask {
   flex-basis: calc(100vw - 300px - 40px - 40px);
   position: relative;
+}
+
+.body__right__contents {
+  padding-bottom: 150px;
+  background-color: #fafafa;
+  min-height: 100%;
 }
