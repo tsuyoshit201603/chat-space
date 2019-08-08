@@ -35,7 +35,7 @@ $(function(){
       var html = buildHTML(data);
       var contents_height = $('.body__right__contents').height();
       $('.body__right__contents').append(html)
-      $('.body__right__footer__form__input').val('')
+      $('#new_message')[0].reset();
       $('.body__right__footer__send').prop( 'disabled', false )
       $('html').animate({scrollTop: contents_height});
     })
