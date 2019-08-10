@@ -8,10 +8,12 @@
       = fa_icon 'cog', class: "header__left--icon__cog"
   .header__right
     .header__right__group
-      test-group
+      = @group.name
     .header__right__member
-      Member : test,test2,test3,test4
-    .header__right__edit
+      %span Member :
+      - @group.users.each do |user|
+        = user.name
+    = link_to edit_group_path(@group), class:"header__right__edit" do
       Edit
 
 .body
