@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def index
-    blank = ""
-    if params[:keyword] != blank
+    if params[:keyword].present?
       @users = User.where('name LIKE(?)', "%#{params[:keyword]}%").where.not(id: params[:selected_users])
       respond_to do |format|
         format.html

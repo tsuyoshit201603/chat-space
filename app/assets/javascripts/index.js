@@ -44,7 +44,6 @@ $(function() {
             $("#user-search-result").off("click");
             $("#user-search-result").on("click", ".chat-group-user__btn--add", function() {
               var this_user = $(this).data();
-              console.log(this_user);
               addUser(this_user);
               $(this).parent().remove();
             })
