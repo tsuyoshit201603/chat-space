@@ -2,22 +2,46 @@ $(function(){
   function buildHTML(message){
     var content = message.content ? `${message.content}` : "";
     var image = message.image ? `<img class="lower-message__image" src=${message.image}>` : "";
-    var html = `<div class="body__right__content">
-                    <div class="body__right__content__user">
-                      ${message.user_name}
-                    </div>
-                    <div class="body__right__content__date">
-                      ${message.date}
-                    </div>
+    var html = `<div class="message__box" data-id=${message.id}>
+                  <div class="body__right__content">
+                      <div class="body__right__content__user">
+                        ${message.user_name}
+                      </div>
+                      <div class="body__right__content__date">
+                        ${message.date}
+                      </div>
                   </div>
                   <div class="body__right__message">
-                    <p class="lower-message__content">
-                      ${content}
-                    </p>
-                    ${image}
-                  </div>`
+                      <p class="lower-message__content">
+                        ${content}
+                      </p>
+                      ${image}
+                  </div>
+                </div>`
     return html;
   }
+
+  var buildMessageHTML = function(message) {
+    var content = message.content ? `${message.content}` : "";
+    var image = message.image ? `<img class="lower-message__image" src=${message.image}>` : "";
+    var html = `<div class="message__box" data-id=${message.id}>
+                  <div class="body__right__content">
+                      <div class="body__right__content__user">
+                        ${message.user_name}
+                      </div>
+                      <div class="body__right__content__date">
+                        ${message.date}
+                      </div>
+                  </div>
+                  <div class="body__right__message">
+                      <p class="lower-message__content">
+                        ${content}
+                      </p>
+                      ${image}
+                  </div>
+                </div>`
+    return html;
+    }
   
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -44,4 +68,29 @@ $(function(){
       $('.body__right__footer__send').prop( 'disabled', false )
     })
   })
-})
+
+  var reloadMessages = function() {
+    last_message_id = $('.message__box').last().data('id');
+    last_group_id = $('.header__right__group').data('id');
+    $.ajax({
+      url: `/groups/${last_group_id}/api/messages`,
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      var insertHTML = '';
+      messages.forEach(function(message){
+        var insertHTML = buildHTML(message)
+        $('.body__right__contents').append(insertHTML)
+        var contents_height = $('.body__right__contents').height();
+        $('html').animate({scrollTop: contents_height});
+      })
+      
+    })
+    .fail(function() {
+      console.log('error');
+    });
+  };
+  $('.header__right__group').length ? setInterval(reloadMessages, 5000) : "";
+});
