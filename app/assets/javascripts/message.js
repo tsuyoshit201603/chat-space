@@ -1,6 +1,5 @@
 $(function(){
   function buildHTML(message){
-    // 条件分岐が壊れてる
     var content = message.content ? `${message.content}` : "";
     var image = message.image ? `<img class="lower-message__image" src=${message.image}>` : "";
     var html = `<div class="message__box" data-id=${message.id}>
@@ -21,6 +20,28 @@ $(function(){
                 </div>`
     return html;
   }
+
+  var buildMessageHTML = function(message) {
+    var content = message.content ? `${message.content}` : "";
+    var image = message.image ? `<img class="lower-message__image" src=${message.image}>` : "";
+    var html = `<div class="message__box" data-id=${message.id}>
+                  <div class="body__right__content">
+                      <div class="body__right__content__user">
+                        ${message.user_name}
+                      </div>
+                      <div class="body__right__content__date">
+                        ${message.date}
+                      </div>
+                  </div>
+                  <div class="body__right__message">
+                      <p class="lower-message__content">
+                        ${content}
+                      </p>
+                      ${image}
+                  </div>
+                </div>`
+    return html;
+    }
   
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -49,23 +70,28 @@ $(function(){
   })
 
   var reloadMessages = function() {
-    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+    console.log('sucsess!')
     last_message_id = $('.message__box').last().data('id');
+    last_group_id = $('.header__right__group').data('id');
     $.ajax({
-      //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
-      url: '/groups/last_message_id/api/messages',
-      //ルーティングで設定した通りhttpメソッドをgetに指定
+      url: `/groups/${last_group_id}/api/messages`,
       type: 'get',
       dataType: 'json',
-      //dataオプションでリクエストに値を含める
       data: {id: last_message_id}
     })
     .done(function(messages) {
-      console.log('success');
+      var insertHTML = '';
+      messages.forEach(function(message){
+        var insertHTML = buildHTML(message)
+        $('.body__right__contents').append(insertHTML)
+        var contents_height = $('.body__right__contents').height();
+        $('html').animate({scrollTop: contents_height});
+      })
+      
     })
     .fail(function() {
       console.log('error');
     });
   };
-
-})
+  $('.header__right__group').length ? setInterval(reloadMessages, 5000) : "";
+});
