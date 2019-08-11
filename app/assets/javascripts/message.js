@@ -70,7 +70,6 @@ $(function(){
   })
 
   var reloadMessages = function() {
-    console.log('sucsess!')
     last_message_id = $('.message__box').last().data('id');
     last_group_id = $('.header__right__group').data('id');
     $.ajax({
