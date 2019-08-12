@@ -18,3 +18,6 @@
 
 # 画像がGithubにコミットされないための記述
 public/uploads/*
+
+# secrets.ymlはAWSのアクセスキーを含むため
+config/secrets.yml
