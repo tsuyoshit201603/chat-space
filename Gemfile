@@ -73,3 +73,8 @@ gem 'rails-i18n', '~>5.1'
 #Carrierwave
 gem 'carrierwave'
 gem 'mini_magick'
+
+#Unicorn
+group :production do
+  gem 'unicorn', '5.4.1'
+end
